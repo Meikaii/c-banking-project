@@ -264,7 +264,24 @@ void edit()
 
 void transact()
 {
+    int ch;
+    int test = 0;
 
+    FILE *oldRec, *newRec;
 
-    
+    oldRec = fopen("record.dat", "r");
+    newRec = fopen("new.dat", "w");
+
+    printf("Enter the account number of the customer: ");
+    scanf("%d", &transaction.accNo);
+
+    while(fscanf(oldRec,"%d %s %d/%d/%d %d %s %d %d %s %lf %d/%d/%d",&add.accNo,add.name,&add.dob.day,&add.dob.month,&add.dob.year,&add.age,add.address, &add.adhaar,&add.phoneNumber,add.accType,&add.amt,&add.deposit.day,&add.deposit.month,&add.deposit.year)!=EOF)
+    {
+        if(add.accNo == transaction.accNo)
+        {
+            test = 1;
+            // to be continued.
+        }
+    }
+
 }
