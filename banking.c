@@ -101,7 +101,7 @@ void newAcc()
     scanf("%d/%d/%d", &add.deposit.day, &add.deposit.month, &add.deposit.year);
     printf("Enter your Account number: ");
     scanf("%d", &check.accNo);
-    while(fscanf(fptr,"%d %s %d/%d/%d %d %s %s %lf %s %f %d/%d/%d\n",&add.accNo,add.name,&add.dob.day,&add.dob.month,&add.dob.year,&add.age,add.address,add.adhaar,&add.phoneNumber,add.accType,&add.amt,&add.deposit.day,&add.deposit.month,&add.deposit.year)!=EOF)
+    while(fscanf(fptr,"%d %s %d/%d/%d %d %s %s %lf %s %f %d/%d/%d\n",&add.accNo, add.name, &add.dob.day, &add.dob.month, &add.dob.year, &add.age, add.address, &add.adhaar, &add.phoneNumber, add.accType, &add.amt, &add.deposit.day, &add.deposit.month, &add.deposit.year)!=EOF)
     {
         if(check.accNo == add.accNo)
         {
@@ -157,4 +157,61 @@ void newAcc()
     {
         printf("INVALID INPUT. TERMINATING... \n");
     }
+}
+
+void edit()
+{
+    int ch;
+    int test = 0;
+
+    FILE *oldRec, *newRec;
+
+    oldRec = fopen("record.dat", "r");
+    newRec = fopen("new.dat", "w");
+
+    printf("Enter the account number to proceed making changes: ");
+    scanf("%d", &update.accNo);
+    while(fscanf(oldRec,"%d %s %d/%d/%d %d %s %s %lf %s %f %d/%d/%d",&add.accNo,add.name,&add.dob.day,&add.dob.month,&add.dob.year,&add.age,add.address, &add.adhaar,&add.phoneNumber,add.accType,&add.amt,&add.deposit.day,&add.deposit.month,&add.deposit.year)!=EOF)
+    {
+        if(add.accNo == update.accNo)
+        {
+            test = 1;
+            printf("Which one of the following do you want to update/make changes?\n");
+            printf("1. Address\n");
+            printf("2. Phone Number\n");
+            printf("Enter your choice: ");
+            scanf("%d", &ch);
+
+            if (ch == 1)
+            {
+                printf("Enter your new address: ");
+                scanf("\n");
+                scanf("%[^\n]%*c", update.address);
+                fprintf(newRec,"%d %s %d/%d/%d %d %s %s %lf %s %f %d/%d/%d",add.accNo,add.name,add.dob.day, add.dob.month, add.dob.year, add.age, update.address, add.adhaar, add.phoneNumber,add.accType, add.amt, add.deposit.day, add.deposit.month, add.deposit.year);
+                printf("\n...\n");
+                printf("Changes saved successfully.\n");
+            }
+            else if (ch == 2)
+            {
+                printf("Enter your new phone number: ");
+                scanf("%d", &update.phoneNumber);
+                if(strlen(update.phoneNumber) < 10 || strlen(update.phoneNumber) > 10)
+                {
+                    printf("Please enter a valid phone number: ");
+                    scanf("%d", &update.phoneNumber);
+                }
+                fprintf(newRec,"%d %s %d/%d/%d %d %s %s %lf %s %f %d/%d/%d", add.accNo,add.name, add.dob.day, add.dob.month, add.dob.year, add.age, add.address, add.adhaar, update.phoneNumber,add.accType, add.amt, add.deposit.day, add.deposit.month, add.deposit.year);
+                printf("\n...\n");
+                printf("Changes saved successfully.\n");
+            }
+        }
+        else
+        {
+            fprintf(newRec,"%d %s %d/%d/%d %d %s %s %lf %s %f %d/%d/%d", add.accNo,add.name, add.dob.day, add.dob.month, add.dob.year, add.age, add.address, add.adhaar, add.phoneNumber,add.accType, add.amt, add.deposit.day, add.deposit.month, add.deposit.year);
+        }
+    }
+    fclose(oldRec);
+    fclose(newRec);
+    remove("record.dat");
+    rename("new.dat", "record.dat");
 }
