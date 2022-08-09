@@ -29,7 +29,7 @@ struct
     char *address;
     char *accType;
     int phoneNumber;
-    float amt;
+    double amt;
     struct date dob;
     struct date deposit;
     struct date withdraw;
@@ -101,7 +101,7 @@ void newAcc()
     scanf("%d/%d/%d", &add.deposit.day, &add.deposit.month, &add.deposit.year);
     printf("Enter your Account number: ");
     scanf("%d", &check.accNo);
-    while(fscanf(fptr,"%d %s %d/%d/%d %d %s %s %lf %s %f %d/%d/%d\n",&add.accNo, add.name, &add.dob.day, &add.dob.month, &add.dob.year, &add.age, add.address, &add.adhaar, &add.phoneNumber, add.accType, &add.amt, &add.deposit.day, &add.deposit.month, &add.deposit.year)!=EOF)
+    while(fscanf(fptr,"%d %s %d/%d/%d %d %s %d %d %s %lf %d/%d/%d\n",&add.accNo, add.name, &add.dob.day, &add.dob.month, &add.dob.year, &add.age, add.address, &add.adhaar, &add.phoneNumber, add.accType, &add.amt, &add.deposit.day, &add.deposit.month, &add.deposit.year)!=EOF)
     {
         if(check.accNo == add.accNo)
         {
@@ -280,8 +280,86 @@ void transact()
         if(add.accNo == transaction.accNo)
         {
             test = 1;
-            // to be continued.
+            printf("Press 1 to Deposit.\nPress 2 to Withdraw.");
+            printf("Enter your choice: ");
+            printf("%d", &ch);
+
+            if (ch == 1)
+            {
+                printf("Enter the amount you want to deposit: $");
+                scanf("%lf", &transaction.amt);
+                add.amt += transaction.amt;
+                fprintf(newRec,"%d %s %d/%d/%d %d %s %d %d %s %lf %d/%d/%d", add.accNo,add.name, add.dob.day, add.dob.month, add.dob.year, add.age, add.address, add.adhaar, add.phoneNumber,add.accType, add.amt, add.deposit.day, add.deposit.month, add.deposit.year);
+                printf("\n Deposited successfully! \n");
+            }
+            else if (ch == 2)
+            {
+                printf("Enter the amount you want to withdraw: $");
+                scanf("%lf", &transaction.amt);
+                add.amt -= transaction.amt;
+                fprintf(newRec,"%d %s %d/%d/%d %d %s %d %d %s %lf %d/%d/%d", add.accNo,add.name, add.dob.day, add.dob.month, add.dob.year, add.age, add.address, add.adhaar, add.phoneNumber,add.accType, add.amt, add.deposit.day, add.deposit.month, add.deposit.year);
+                printf("\n Withdrawn successfully! \n");
+            }
+        }
+        else
+        {
+            fprintf(newRec,"%d %s %d/%d/%d %d %s %d %d %s %lf %d/%d/%d", add.accNo,add.name, add.dob.day, add.dob.month, add.dob.year, add.age, add.address, add.adhaar, add.phoneNumber,add.accType, add.amt, add.deposit.day, add.deposit.month, add.deposit.year);
         }
     }
+    fclose(oldRec);
+    fclose(newRec);
+    remove("record.dat");
+    rename("new.dat", "record.dat");
 
+    if (test != 1)
+    {
+        printf("Record not found!..\n");
+        printf("Press 0 to try again.\nPress 1 to return to main menu.\nPress 2 to exit.\n");
+        printf("Enter your choice: ");
+        scanf("%d", &menuExit);
+        
+        if (menuExit == 0)
+        {
+            edit();
+        }
+        else if (menuExit == 1)
+        {
+            menu();
+        }
+        else if (menuExit == 2)
+        {
+            closeBnk();
+        }
+        else
+        {
+            printf("Invalid input. Teminating. \n");
+            exit(1);
+        }
+    }
+    else
+    {
+        printf("Press 1 to return to main menu\nPress 0 to exit.");
+        printf("Enter your choice: ");
+        scanf("%d", &menuExit);
+
+        if (menuExit == 0)
+        {
+            closeBnk();
+        } 
+        else if (menuExit == 1)
+        {
+            menu();
+        }
+        else
+        {
+            printf("Invalid input. Teminating. \n");
+            exit(1);
+        }
+    }
+}
+
+void erase()
+{
+
+    
 }
