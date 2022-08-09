@@ -214,4 +214,9 @@ void edit()
     fclose(newRec);
     remove("record.dat");
     rename("new.dat", "record.dat");
+
+    if (test != 1)
+    {
+        printf("Record not found!");
+    }
 }
