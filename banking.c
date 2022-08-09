@@ -11,7 +11,7 @@ void transact();
 void erase();
 void showDetails();
 void closeBnk();
-float interest(float time, float principle, float rate);
+double interest(double time, double principle, double rate);
 
 struct date
 {
@@ -33,7 +33,7 @@ struct
     struct date dob;
     struct date deposit;
     struct date withdraw;
-} add,update,check,remove,transaction;
+} add,update,check,rem,transaction;
 
 int main()
 {
@@ -42,9 +42,9 @@ int main()
     return 0;
 }
 
-float interest(float time, float principle, float rate)
+double interest(double time, double principle, double rate)
 {
-    float SI;
+    double SI;
     
     SI = (principle * time * rate)/100;
     return SI;
@@ -132,12 +132,12 @@ void newAcc()
     }
 
     printf("Enter the amount you want to deposit: ");
-    scanf("%f", &add.amt);
+    scanf("%lf", &add.amt);
     printf("Type of account:\n\t>>Current\n\t>>Saving");
     scanf("\n");
     scanf("%[^\n]%*c", add.accType);
 
-        fprintf(fptr,"%d %s %d/%d/%d %d %s %s %lf %s %f %d/%d/%d\n",add.accNo,add.name,add.dob.day,add.dob.month,add.dob.year,add.age,add.address,add.adhaar,add.phoneNumber,add.accType,add.amt,add.deposit.day,add.deposit.month,add.deposit.year);
+        fprintf(fptr,"%d %s %d/%d/%d %d %s %d %d %s %lf %d/%d/%d\n",add.accNo,add.name,add.dob.day,add.dob.month,add.dob.year,add.age,add.address,add.adhaar,add.phoneNumber,add.accType,add.amt,add.deposit.day,add.deposit.month,add.deposit.year);
 
     fclose(fptr);
     
@@ -171,7 +171,7 @@ void edit()
 
     printf("Enter the account number to proceed making changes: ");
     scanf("%d", &update.accNo);
-    while(fscanf(oldRec,"%d %s %d/%d/%d %d %s %s %lf %s %f %d/%d/%d",&add.accNo,add.name,&add.dob.day,&add.dob.month,&add.dob.year,&add.age,add.address, &add.adhaar,&add.phoneNumber,add.accType,&add.amt,&add.deposit.day,&add.deposit.month,&add.deposit.year)!=EOF)
+    while(fscanf(oldRec,"%d %s %d/%d/%d %d %s %d %d %s %lf %d/%d/%d",&add.accNo,add.name,&add.dob.day,&add.dob.month,&add.dob.year,&add.age,add.address, &add.adhaar,&add.phoneNumber,add.accType,&add.amt,&add.deposit.day,&add.deposit.month,&add.deposit.year)!=EOF)
     {
         if(add.accNo == update.accNo)
         {
@@ -187,7 +187,7 @@ void edit()
                 printf("Enter your new address: ");
                 scanf("\n");
                 scanf("%[^\n]%*c", update.address);
-                fprintf(newRec,"%d %s %d/%d/%d %d %s %s %lf %s %f %d/%d/%d",add.accNo,add.name,add.dob.day, add.dob.month, add.dob.year, add.age, update.address, add.adhaar, add.phoneNumber,add.accType, add.amt, add.deposit.day, add.deposit.month, add.deposit.year);
+                fprintf(newRec,"%d %s %d/%d/%d %d %s %d %d %s %lf %d/%d/%d",add.accNo,add.name,add.dob.day, add.dob.month, add.dob.year, add.age, update.address, add.adhaar, add.phoneNumber,add.accType, add.amt, add.deposit.day, add.deposit.month, add.deposit.year);
                 printf("\n...\n");
                 printf("Changes saved successfully.\n");
             }
@@ -200,14 +200,14 @@ void edit()
                     printf("Please enter a valid phone number: ");
                     scanf("%d", &update.phoneNumber);
                 }
-                fprintf(newRec,"%d %s %d/%d/%d %d %s %s %lf %s %f %d/%d/%d", add.accNo,add.name, add.dob.day, add.dob.month, add.dob.year, add.age, add.address, add.adhaar, update.phoneNumber,add.accType, add.amt, add.deposit.day, add.deposit.month, add.deposit.year);
+                fprintf(newRec,"%d %s %d/%d/%d %d %s %d %d %s %lf %d/%d/%d", add.accNo,add.name, add.dob.day, add.dob.month, add.dob.year, add.age, add.address, add.adhaar, update.phoneNumber,add.accType, add.amt, add.deposit.day, add.deposit.month, add.deposit.year);
                 printf("\n...\n");
                 printf("Changes saved successfully.\n");
             }
         }
         else
         {
-            fprintf(newRec,"%d %s %d/%d/%d %d %s %s %lf %s %f %d/%d/%d", add.accNo,add.name, add.dob.day, add.dob.month, add.dob.year, add.age, add.address, add.adhaar, add.phoneNumber,add.accType, add.amt, add.deposit.day, add.deposit.month, add.deposit.year);
+            fprintf(newRec,"%d %s %d/%d/%d %d %s %d %d %s %lf %d/%d/%d", add.accNo,add.name, add.dob.day, add.dob.month, add.dob.year, add.age, add.address, add.adhaar, add.phoneNumber,add.accType, add.amt, add.deposit.day, add.deposit.month, add.deposit.year);
         }
     }
     fclose(oldRec);
@@ -217,6 +217,54 @@ void edit()
 
     if (test != 1)
     {
-        printf("Record not found!");
+        printf("Record not found!..\n");
+        printf("Press 0 to try again.\nPress 1 to return to main menu.\nPress 2 to exit.\n");
+        printf("Enter your choice: ");
+        scanf("%d", &menuExit);
+        
+        if (menuExit == 0)
+        {
+            edit();
+        }
+        else if (menuExit == 1)
+        {
+            menu();
+        }
+        else if (menuExit == 2)
+        {
+            closeBnk();
+        }
+        else
+        {
+            printf("Invalid input. Teminating. \n");
+            exit(1);
+        }
     }
+    else
+    {
+        printf("Press 1 to return to main menu\nPress 0 to exit.");
+        printf("Enter your choice: ");
+        scanf("%d", &menuExit);
+
+        if (menuExit == 0)
+        {
+            closeBnk();
+        } 
+        else if (menuExit == 1)
+        {
+            menu();
+        }
+        else
+        {
+            printf("Invalid input. Teminating. \n");
+            exit(1);
+        }
+    }
+}
+
+void transact()
+{
+
+
+    
 }
