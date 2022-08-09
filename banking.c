@@ -135,7 +135,7 @@ void newAcc()
     scanf("%f", &add.amt);
     printf("Type of account:\n\t>>Current\n\t>>Saving");
     scanf("\n");
-    scanf("%[^\n\%*c", add.accType);
+    scanf("%[^\n]%*c", add.accType);
 
         fprintf(fptr,"%d %s %d/%d/%d %d %s %s %lf %s %f %d/%d/%d\n",add.accNo,add.name,add.dob.day,add.dob.month,add.dob.year,add.age,add.address,add.adhaar,add.phoneNumber,add.accType,add.amt,add.deposit.day,add.deposit.month,add.deposit.year);
 
