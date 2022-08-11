@@ -5,7 +5,9 @@ Here's my first C project.
 ## Description
 This code contains pure C code and no other files that are to be downloaded externally. This can also be quite useful to those who are looking to continue or find themselves making their first project.
 
-## Completion
-This isn't complete yet. A few functions are missing/not yet defined. This project either continues or goes down deep to the rabbit hole.
+## End note
+The code is completed, though expect a few errors which will be debugged soon (worst case scenario: never). Don't expect this to be perfect. Use it as a guide or as a reference if you are planning to make a similar project. :smiley:
 
-> Also please do not send any request for this repo. It's literally useless if you do so. 
+or even possible, just yoink this code and use it as a project. 🗿
+
+> Project is completed and possibly discontinued(?).
