@@ -1,4 +1,4 @@
-# Banking Project in C
+# Starter Project in C
 Here's my first C project. 
 > This might either seem outdated/inefficient or just simply bland and boring for someone reviewing my code. Please continue with caution.
 
