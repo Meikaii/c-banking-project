@@ -1,6 +1,6 @@
 # Starter Project in C
 Here's my first C project. 
-> This might either seem outdated/inefficient or just simply bland and boring for someone reviewing my code. Please continue with caution.
+> This code might seem outdated. Please continue with caution.
 
 ## Description
 This code contains C code and no external files are needed. This can also be quite useful to those who are looking to continue or find themselves making their first project.
